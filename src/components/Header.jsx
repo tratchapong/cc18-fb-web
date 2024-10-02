@@ -1,10 +1,11 @@
 import React from 'react'
-import { FacebookLogo } from '../icons'
+import { FacebookLogo, GroupIcon, HomeIcon, PlayIcon, ShopIcon } from '../icons'
 
 export default function Header() {
 	return (
-		<header className="bg-orange-200 h-14 w-full fixed top-0 z-10 px-1">
-			<div className="flex gap-2 items-center">
+		<header className="bg-orange-200 h-14 w-full fixed top-0 z-10 px-1 flex justify-between">
+			{/* Logo + input */}
+			<div className="flex gap-2 items-center flex-1">
 				<FacebookLogo className='w-12' />
 				<label className="input input-bordered flex items-center gap-2 w-64 h-10 rounded-full">
 					<input type="text" className="grow" placeholder="Search" />
@@ -19,8 +20,25 @@ export default function Header() {
 							clipRule="evenodd" />
 					</svg>
 				</label>
-
 			</div>
+			{/* center group-icons */}
+			<div className="flex gap-2 flex-1 justify-center">
+				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+					<HomeIcon className='w-3/5' />
+				</div>
+				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+					<PlayIcon className='w-3/5' />
+				</div>
+				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+					<ShopIcon className='w-3/5' />
+				</div>
+				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+					<GroupIcon className='w-3/5' />
+				</div>
+			</div>
+			{/* Right menu */}
+			<div className="flex gap-2 flex-1 justify-end">Avatar</div>
+
 		</header>
 	)
 }
