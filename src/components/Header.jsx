@@ -1,43 +1,65 @@
 import React from 'react'
-import { FacebookLogo, GroupIcon, HomeIcon, PlayIcon, ShopIcon } from '../icons'
+import { FacebookLogo, GroupIcon, HomeIcon, MenuIcon, MessengerIcon, NotificationIcon, PlayIcon, SearchIcon, ShopIcon } from '../icons'
 
 export default function Header() {
 	return (
-		<header className="bg-orange-200 h-14 w-full fixed top-0 z-10 px-1 flex justify-between">
+		<header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
 			{/* Logo + input */}
 			<div className="flex gap-2 items-center flex-1">
 				<FacebookLogo className='w-12' />
 				<label className="input input-bordered flex items-center gap-2 w-64 h-10 rounded-full">
 					<input type="text" className="grow" placeholder="Search" />
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 16 16"
-						fill="currentColor"
-						className="h-4 w-4 opacity-70">
-						<path
-							fillRule="evenodd"
-							d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-							clipRule="evenodd" />
-					</svg>
+					<SearchIcon />
 				</label>
 			</div>
 			{/* center group-icons */}
 			<div className="flex gap-2 flex-1 justify-center">
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
-					<HomeIcon className='w-3/5' />
+					<HomeIcon className='w-2/5' />
 				</div>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
-					<PlayIcon className='w-3/5' />
+					<PlayIcon className='w-2/5' />
 				</div>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
-					<ShopIcon className='w-3/5' />
+					<ShopIcon className='w-2/5' />
 				</div>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
-					<GroupIcon className='w-3/5' />
+					<GroupIcon className='w-2/5' />
 				</div>
 			</div>
 			{/* Right menu */}
-			<div className="flex gap-2 flex-1 justify-end">Avatar</div>
+			<div className="flex gap-3 flex-1 justify-end">
+				<div className="avatar justify-center items-center">
+					<div className="w-10 h-10 rounded-full !flex justify-center items-center
+						bg-gray-300 hover:bg-gray-400">
+						<MenuIcon className='w-5' />
+					</div>
+				</div>
+				<div className="avatar justify-center items-center">
+					<div className="w-10 h-10 rounded-full !flex justify-center items-center
+						bg-gray-300 hover:bg-gray-400">
+						<MessengerIcon className='w-8' />
+					</div>
+				</div>
+				<div className="avatar justify-center items-center">
+					<div className="w-10 h-10 rounded-full !flex justify-center items-center
+						bg-gray-300 hover:bg-gray-400">
+						<NotificationIcon className='w-9' />
+					</div>
+				</div>
+				<div className="dropdown dropdown-end mt-2">
+					<div tabIndex={0} role="button" className="">
+						<div className="avatar">
+							<div className="w-10 h-10 rounded-full">
+								<img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+							</div>
+						</div>
+					</div>
+					<ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow">
+						<li><a>Logout</a></li>
+					</ul>
+				</div>
+			</div>
 
 		</header>
 	)
