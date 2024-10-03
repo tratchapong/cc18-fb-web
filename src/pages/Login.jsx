@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FacebookTitle } from "../icons";
+import axios from "axios";
 
 
 export default function Login() {
@@ -11,6 +12,20 @@ export default function Login() {
   const hdlChange = e => {
 		setInput( prv => ({...prv, [e.target.name] : e.target.value}))
 	}	
+
+	const hdlLogin = async e => {
+		try{
+			e.preventDefault()
+			// validation
+			if( !(input.identity.trim() && input.password.trim()) ) {
+				return alert('Please fill all input')
+			}
+			const rs = await axios.post('http://localhost:8899/auth/login', input)
+			console.log(rs.data)
+		}catch(err){
+			console.log(err.message)	
+		}
+	}
 
 	return (
 		<div className="h-[700px] pt-20 pb-28 bg-[#f2f4f7]">
@@ -24,7 +39,7 @@ export default function Login() {
 				</div>
 				<div className="flex flex-1">
 					<div className="card bg-base-100 w-full h-[350px] shadow-xl mt-8">
-						<form>
+						<form onSubmit={hdlLogin}>
 							<div className="card-body gap-3 p-4">
 								<input 
 									type="text" 
