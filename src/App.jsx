@@ -1,22 +1,15 @@
-import Header from "./components/Header"
-import PostContainer from "./components/PostContainer"
-import SidebarContact from "./components/SidebarContact"
-import SidebarMenu from "./components/SidebarMenu"
+import AppRouter from "./routes/AppRouter";
+import { ToastContainer, toast } from "react-toastify";
 
-
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
   return (
-    <div className="min-h-screen bg-yellow-100">
-      <Header />
-      <main className="relative flex bg-gray-100 border pt-14">
-        <SidebarMenu />      
-        <PostContainer />
-        <SidebarContact />
-      </main>
-    </div>
-  )
+    <>
+      <AppRouter />
+      <ToastContainer />
+    </>
+  );
 }
 
-export default App
+export default App;

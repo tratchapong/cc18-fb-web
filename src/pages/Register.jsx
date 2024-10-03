@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 export default function Register() {
 
@@ -15,11 +16,11 @@ export default function Register() {
 		setInput(prv => ({ ...prv, [e.target.name]: e.target.value }))
 	}
 
-	const hdlRegister = e => {
+	const hdlRegister = async e => {
 		try{
 			e.preventDefault()
 			//validation
-			const rs = axios.post('http://localhost:8899/auth/register', input)
+			const rs = await axios.post('http://localhost:8899/auth/register', input)
 			console.log(rs.data)
 			setInput({
 				firstName: '',
@@ -28,10 +29,13 @@ export default function Register() {
 				password: '',
 				confirmPassword: '',
 			})
-			e.target.closest('dialog').close()
+			toast.success(rs.msg)
 		}catch(err){
 			const errMsg = err.response?.data?.error || err.message
-			console.log(errMsg)			
+			console.log(errMsg)	
+			toast.error(errMsg)		
+		}finally {
+			e.target.closest('dialog').close()
 		}
 	}
 

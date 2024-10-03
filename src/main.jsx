@@ -6,7 +6,7 @@ import Login from './pages/Login.jsx'
 
 createRoot(document.getElementById('root')).render(
   <>
-    {/* <App /> */}
-    <Login />
+    <App />
+    {/* <Login /> */}
   </>
 )
