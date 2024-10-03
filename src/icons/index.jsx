@@ -109,20 +109,20 @@ export function GroupIcon(props) {
 }
 
 export function SearchIcon(props) {
-	return (
-		<svg
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 16 16"
-		fill="currentColor"
-		className="h-4 w-4 opacity-70"
-		{...props}
-		>
-		<path
-			fillRule="evenodd"
-			d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-			clipRule="evenodd" />
-	</svg>
-	)
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      className="h-4 w-4 opacity-70"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+        clipRule="evenodd" />
+    </svg>
+  )
 }
 
 export function MenuIcon(props) {
@@ -156,7 +156,7 @@ export function MessengerIcon(props) {
 }
 
 export function NotificationIcon(props) {
-	return (
+  return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
@@ -168,4 +168,72 @@ export function NotificationIcon(props) {
         fill="#000"
       />
     </svg>
-  )}
+  )
+}
+
+export function FriendIcon(props) {
+  return (
+    <svg
+      fill="#697cb5"
+      viewBox="-3 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="#697cb5"
+      {...props}
+    >
+      <path d="M17.25 20.5c1.281.719 2 1.906 1.875 3.125-.063.75-.031.75-1 .875-.594.063-4.375.094-8.219.094-4.375 0-8.938-.031-9.281-.125-1.281-.344-.531-2.719 1.156-3.844 1.344-.844 4.063-2.156 4.813-2.313 1.031-.219 1.156-.875 0-2.844-.25-.469-.531-1.813-.563-3.25C6 9.905 6.406 8.343 8.437 7.562a3.977 3.977 0 011.219-.188c1.344 0 2.594.75 3.125 1.844.719 1.469.375 5.313-.375 6.719-.906 1.594-.813 2.094.188 2.344.625.156 2.688 1.125 4.656 2.219zm6.844-1.969c1 .531 1.563 1.5 1.469 2.438-.031.563-.031.594-.781.688-.375.063-2.344.094-4.656.094-.406-.969-1.188-1.844-2.25-2.406a41.827 41.827 0 00-3.75-1.875c.719-.344 1.344-.625 1.625-.688.781-.188.875-.625 0-2.188-.219-.375-.469-1.438-.5-2.563-.031-1.813.375-3.063 1.938-3.656.313-.094.656-.156.969-.156 1.031 0 2 .563 2.406 1.438.531 1.156.281 4.156-.281 5.281-.688 1.25-.625 1.625.156 1.813.5.125 2.094.906 3.656 1.781z" />
+    </svg>
+  )
+}
+
+export function ClockIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M22.7 13.5l-2-2-2 2M21 12a9 9 0 11-1.245-4.57M12 7v5l3 2"
+        stroke="#000"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function BookmarkIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M5 6.2c0-1.12 0-1.68.218-2.108a2 2 0 01.874-.874C6.52 3 7.08 3 8.2 3h7.6c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C19 4.52 19 5.08 19 6.2V21l-7-5-7 5V6.2z"
+        stroke="#000"
+        strokeWidth={2}
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export function MoreIcon(props) {
+  return (
+    <svg
+      viewBox="0 0 1024 1024"
+      className="icon"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path d="M478.312 644.16c24.38 26.901 64.507 26.538 88.507-.89l270.57-309.222c7.758-8.867 6.86-22.344-2.008-30.103-8.866-7.759-22.344-6.86-30.103 2.007L534.71 615.173c-7.202 8.231-17.541 8.325-24.782.335L229.14 305.674c-7.912-8.73-21.403-9.394-30.133-1.482s-9.394 21.403-1.482 30.134l280.786 309.833z" />
+    </svg>
+  )
+}
+
+
+
