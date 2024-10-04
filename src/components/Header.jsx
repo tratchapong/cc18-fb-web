@@ -16,7 +16,10 @@ export default function Header() {
 			</div>
 			{/* center group-icons */}
 			<div className="flex gap-2 flex-1 justify-center">
-				<Link to='/' className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+				<Link 
+					to='/'
+					className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900"
+				>
 					<HomeIcon className='w-2/5' />
 				</Link>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
@@ -25,7 +28,10 @@ export default function Header() {
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<ShopIcon className='w-2/5' />
 				</div>
-				<Link to='/friends' className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+				<Link 
+					to='/friends'
+					className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900"
+				>
 					<GroupIcon className='w-2/5' />
 				</Link>
 			</div>
@@ -56,8 +62,8 @@ export default function Header() {
 								<img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
 							</div>
 						</div> */}
-						<Avatar 
-							className = "w-11 h-11 rounded-full"
+						<Avatar
+							className="w-11 h-11 rounded-full"
 							imgSrc="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
 						/>
 					</div>

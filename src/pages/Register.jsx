@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 export default function Register() {
 
@@ -29,9 +30,11 @@ export default function Register() {
 				confirmPassword: '',
 			})
 			e.target.closest('dialog').close()
+			toast.success('Register ok')
 		}catch(err){
 			const errMsg = err.response?.data?.error || err.message
-			console.log(errMsg)			
+			console.log(errMsg)	
+			toast.error(errMsg)		
 		}
 	}
 

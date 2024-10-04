@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FacebookTitle } from "../icons";
 import axios from "axios";
 import Register from "./Register";
+import { toast } from "react-toastify";
 
 
 export default function Login() {
@@ -19,13 +20,15 @@ export default function Login() {
 			e.preventDefault()
 			// validation
 			if (!(input.identity.trim() && input.password.trim())) {
-				return alert('Please fill all input')
+				return toast.info('Please fill all input')
 			}
 			const rs = await axios.post('http://localhost:8899/auth/login', input)
 			console.log(rs.data)
+			toast.success('Login Successful')
 		} catch (err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
+			toast.error(errMsg, {position : 'top-center'})
 		}
 	}
 

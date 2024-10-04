@@ -26,7 +26,7 @@ const userRouter = createBrowserRouter([
 ])
 
 export default function AppRouter() {
-	const user = {}
+	const user = null
 	const finalRouter = user ? userRouter : guestRouter
 	return(
 		<RouterProvider router={finalRouter} />
