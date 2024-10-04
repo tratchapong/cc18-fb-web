@@ -6,6 +6,8 @@ import useUserStore from '../stores/userStore'
 
 export default function Header() {
 	const logout = useUserStore(state => state.logout)
+	const user = useUserStore(state => state.user)
+	console.log(user)
 	return (
 		<header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
 			{/* Logo + input */}
@@ -59,14 +61,10 @@ export default function Header() {
 				</div>
 				<div className="dropdown dropdown-end mt-2">
 					<div tabIndex={0} role="button" className="">
-						{/* <div className="avatar">
-							<div className="w-10 h-10 rounded-full">
-								<img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-							</div>
-						</div> */}
 						<Avatar
 							className="w-11 h-11 rounded-full"
-							imgSrc="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+							imgSrc={user.profileImage}
+							menu={true}
 						/>
 					</div>
 					<ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow">
@@ -76,7 +74,6 @@ export default function Header() {
 					</ul>
 				</div>
 			</div>
-
 		</header>
 	)
 }

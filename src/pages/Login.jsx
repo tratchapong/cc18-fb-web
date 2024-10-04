@@ -24,11 +24,8 @@ export default function Login() {
 			if (!(input.identity.trim() && input.password.trim())) {
 				return toast.info('Please fill all input')
 			}
-			// const rs = await axios.post('http://localhost:8899/auth/login', input)
 			let data = await login(input)
-			console.log(data)
-			toast.success('Login Successful')
-			toast.success(JSON.stringify(data))
+			// toast.success('Login Successful')
 		} catch (err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
