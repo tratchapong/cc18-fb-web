@@ -2,8 +2,10 @@ import React from 'react'
 import { FacebookLogo, GroupIcon, HomeIcon, MenuIcon, MessengerIcon, NotificationIcon, PlayIcon, SearchIcon, ShopIcon } from '../icons'
 import Avatar from './Avatar'
 import { Link } from 'react-router-dom'
+import useUserStore from '../stores/userStore'
 
 export default function Header() {
+	const logout = useUserStore(state => state.logout)
 	return (
 		<header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
 			{/* Logo + input */}
@@ -16,7 +18,7 @@ export default function Header() {
 			</div>
 			{/* center group-icons */}
 			<div className="flex gap-2 flex-1 justify-center">
-				<Link 
+				<Link
 					to='/'
 					className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900"
 				>
@@ -28,7 +30,7 @@ export default function Header() {
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<ShopIcon className='w-2/5' />
 				</div>
-				<Link 
+				<Link
 					to='/friends'
 					className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900"
 				>
@@ -68,7 +70,9 @@ export default function Header() {
 						/>
 					</div>
 					<ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow">
-						<li><a>Logout</a></li>
+						<li onClick={logout}>
+							<a>Logout</a>
+						</li>
 					</ul>
 				</div>
 			</div>
