@@ -8,9 +8,11 @@ export default function PostItem(props) {
 			<div className="card-body p-3">
 				<div className="flex justify-between">
 					<div className="flex gap-3">
-						<Avatar className='w-11 h11 rounded-full' />
+						<Avatar
+							imgSrc={post.user.profileImage}
+						 className='w-11 h11 rounded-full' />
 						<div className="flex flex-col">
-							<p className='font-bold'>{post.user.firstName}</p>
+							<p className='font-bold'>{post.user.firstName} {post.user.lastName}</p>
 							<p className="text-xs font-bold opacity-50">59 min.</p>
 						</div>
 					</div>

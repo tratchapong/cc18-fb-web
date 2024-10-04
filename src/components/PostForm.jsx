@@ -10,6 +10,7 @@ export default function PostForm() {
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const createPost = usePostStore(state => state.createPost)
+	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const [message, setMessage] = useState('')
 
 	const hdlChange = e => {
@@ -18,11 +19,9 @@ export default function PostForm() {
 	const hdlCreatePost = async e => {
 		try {
 			let body = { message : message}
-			// const rs = await axios.post('http://localhost:8899/post', body , {
-			// 	headers : { Authorization : `Bearer ${token}`}
-			// })
 			let newPost = await createPost(body, token)
-			toast.success(JSON.stringify(newPost))
+			getAllPosts(token)
+			e.target.closest('dialog').close()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
