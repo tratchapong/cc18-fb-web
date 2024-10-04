@@ -4,10 +4,12 @@ import useUserStore from '../stores/userStore'
 import { PhotoIcon } from '../icons'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import usePostStore from '../stores/postStore'
 
 export default function PostForm() {
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
+	const createPost = usePostStore(state => state.createPost)
 	const [message, setMessage] = useState('')
 
 	const hdlChange = e => {
@@ -16,10 +18,11 @@ export default function PostForm() {
 	const hdlCreatePost = async e => {
 		try {
 			let body = { message : message}
-			const rs = await axios.post('http://localhost:8899/post', body , {
-				headers : { Authorization : `Bearer ${token}`}
-			})
-			toast.success(JSON.stringify(rs.data))
+			// const rs = await axios.post('http://localhost:8899/post', body , {
+			// 	headers : { Authorization : `Bearer ${token}`}
+			// })
+			let newPost = await createPost(body, token)
+			toast.success(JSON.stringify(newPost))
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)

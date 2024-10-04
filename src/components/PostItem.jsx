@@ -1,15 +1,16 @@
 import Avatar from './Avatar'
 import { CloseIcon, CommentIcon, LikeIcon, MenuIcon, PhotoIcon, ShareIcon, SmileIcon, ThreeDotIcon, VideoIcon } from '../icons'
 
-export default function PostItem() {
-	return (
+export default function PostItem(props) {
+	const {post} = props
+ 	return (
 		<div className="card bg-base-100 shadow-xl">
 			<div className="card-body p-3">
 				<div className="flex justify-between">
 					<div className="flex gap-3">
 						<Avatar className='w-11 h11 rounded-full' />
 						<div className="flex flex-col">
-							<p className='font-bold'>Andy Codecamp</p>
+							<p className='font-bold'>{post.user.firstName}</p>
 							<p className="text-xs font-bold opacity-50">59 min.</p>
 						</div>
 					</div>
@@ -27,7 +28,7 @@ export default function PostItem() {
 					</div>
 				</div>
 				{/* Post message */}
-				<p>This is caption</p>
+				<p>{post.message}</p>
 
 
 				<div className="divider h-0 my-0"></div>
