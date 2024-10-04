@@ -1,6 +1,7 @@
 import React from 'react'
 import { FacebookLogo, GroupIcon, HomeIcon, MenuIcon, MessengerIcon, NotificationIcon, PlayIcon, SearchIcon, ShopIcon } from '../icons'
 import Avatar from './Avatar'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
 	return (
@@ -15,18 +16,18 @@ export default function Header() {
 			</div>
 			{/* center group-icons */}
 			<div className="flex gap-2 flex-1 justify-center">
-				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+				<Link to='/' className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<HomeIcon className='w-2/5' />
-				</div>
+				</Link>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<PlayIcon className='w-2/5' />
 				</div>
 				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<ShopIcon className='w-2/5' />
 				</div>
-				<div className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
+				<Link to='/friends' className="flex justify-center w-20  hover:border-b-2 hover:border-blue-900">
 					<GroupIcon className='w-2/5' />
-				</div>
+				</Link>
 			</div>
 			{/* Right menu */}
 			<div className="flex gap-3 flex-1 justify-end">
