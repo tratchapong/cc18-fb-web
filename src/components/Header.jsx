@@ -3,10 +3,16 @@ import { FacebookLogo, GroupIcon, HomeIcon, MenuIcon, MessengerIcon, Notificatio
 import Avatar from './Avatar'
 import { Link } from 'react-router-dom'
 import useUserStore from '../stores/userStore'
+import { useShallow } from 'zustand/shallow'
 
 export default function Header() {
-	const logout = useUserStore(state => state.logout)
-	const user = useUserStore(state => state.user)
+	// const logout = useUserStore(state => state.logout)
+	// const user = useUserStore(state => state.user)
+	const {user, logout} = useUserStore( 
+		useShallow( state => ({ user: state.user, logout : state.logout }) ) )
+
+	// const {user, logout} = useUserStore() *** No good ***
+
 	console.log(user)
 	return (
 		<header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
