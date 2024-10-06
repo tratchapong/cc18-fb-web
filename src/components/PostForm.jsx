@@ -37,9 +37,9 @@ export default function PostForm(props) {
       //   console.log(`${key}: ${value} `);
       // }
       body.append('image', file)
-      const rs = await createPost(body, token);
+      const rs = await createPost(body, token, user);
       console.log(rs)
-      getAllPosts(token);
+      // getAllPosts(token);
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
       console.log(errMsg);
