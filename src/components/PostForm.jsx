@@ -11,6 +11,7 @@ export default function PostForm(props) {
   const token = useUserStore((state) => state.token);
   const createPost = usePostStore((state) => state.createPost);
   const getAllPosts = usePostStore((state) => state.getAllPosts);
+  const [file, setFile] = useState(null)
   const [message, setMessage] = useState("");
   const [addPic, setAddPic] = useState(false)
 
@@ -56,7 +57,7 @@ export default function PostForm(props) {
         value={message}
         onChange={hdlChange}
       ></textarea>
-      {addPic && <AddPicture closeMe={()=>setAddPic(false)} />}
+      {addPic && <AddPicture closeMe={()=>setAddPic(false)} file={file} setFile={setFile}  />}
       <div className="flex border rounded-lg p-2 justify-between items-center">
         <p>add with your post</p>
         <div className="flex gap-2">
