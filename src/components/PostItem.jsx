@@ -3,18 +3,32 @@ import {
   CloseIcon,
   CommentIcon,
   LikeIcon,
-  MenuIcon,
-  PhotoIcon,
   ShareIcon,
-  SmileIcon,
   ThreeDotIcon,
-  VideoIcon,
 } from "../icons";
 import useUserStore from "../stores/userStore";
+import usePostStore from "../stores/postStore";
+import { toast } from "react-toastify";
 
 export default function PostItem(props) {
   const { post } = props;
   const user = useUserStore((state) => state.user);
+	const token = useUserStore(state => state.token)
+	const deletePost = usePostStore(state => state.deletePost)
+
+	const hdlDelete = async e => {
+		try{
+			if(!confirm("Delete this post?")) {
+				return console.log('cancel delete')
+			}
+			deletePost(token, post.id)
+			// toast.success('Delete done')
+		}catch(err){
+			const errMsg = err.response?.data?.error || err.message
+			toast.error(errMsg)
+			console.log(err)			
+		}
+	}
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body p-3">
@@ -48,7 +62,7 @@ export default function PostItem(props) {
                   <li>
                     <a>Edit</a>
                   </li>
-                  <li>
+                  <li onClick={hdlDelete}>
                     <a>Delete</a>
                   </li>
                 </ul>

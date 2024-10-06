@@ -19,6 +19,14 @@ const usePostStore = create( (set, get) => ({
 			headers : { Authorization : `Bearer ${token}`}
 		})
 		set({ posts: rs.data.posts , loading: false})
+	},
+	deletePost : async (token, id) => {
+		const rs = await axios.delete(`http://localhost:8899/post/${id}`,{
+			headers : { Authorization : `Bearer ${token}`}
+		})
+		set(state => ({
+			posts : state.posts.filter(el => el.id !== id)
+		}))
 	}
 }))
 
