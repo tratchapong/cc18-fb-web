@@ -89,7 +89,7 @@ export default function PostForm(props) {
           </div>
         </div>
       </div>
-      <button className="btn btn-sm" onClick={hdlCreatePost}>
+      <button className={`btn btn-sm ${!message && !file ? 'btn-disabled' : 'btn-primary'}`} onClick={hdlCreatePost}>
         Create Post
       </button>
     </div>
