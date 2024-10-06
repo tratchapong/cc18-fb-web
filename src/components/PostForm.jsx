@@ -23,14 +23,21 @@ export default function PostForm(props) {
       // let body = { message: message };
       const body = new FormData()
       body.append('message', message)
-      if(file) {
-        body.append('image', file)
-      }
-      for (let [key, value] of body.entries()) {
-        console.log(`${key}: ${value} `);
-      }
-      // const newPost = await createPost(body, token);
-      // getAllPosts(token);
+      // *** multiple files ***
+      // if(file) {
+      //   for(let el of file){
+      //     body.append('image', el)
+      //   }
+
+      // *** log body of FormData ***
+      // }
+      // for (let [key, value] of body.entries()) {
+      //   console.log(`${key}: ${value} `);
+      // }
+      body.append('image', file)
+      const rs = await createPost(body, token);
+      console.log(rs)
+      getAllPosts(token);
       e.target.closest("dialog").close();
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
@@ -38,6 +45,7 @@ export default function PostForm(props) {
       toast.error(errMsg);
     }
   };
+
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-xl text-center">Create post</h3>

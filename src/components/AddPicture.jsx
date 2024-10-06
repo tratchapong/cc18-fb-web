@@ -21,10 +21,14 @@ export default function AddPicture(props) {
       <div className="bg-slate-100 hover:bg-slate-200 min-h-40 rounded-lg relative cursor-pointer"
         onClick={()=>document.getElementById('input-file').click()}
       >
-        <input type="file" className='opacity-0' id='input-file'
+        <input type="file" className='opacity-0' id='input-file' multiple
           onChange={hdlFileChange}
         />
         {file && <img src={URL.createObjectURL(file)} className='h-100 block mx-auto' />  }
+        {/* {file && 
+          Array.from(file).map(el => (<img src={URL.createObjectURL(el)} className='block mx-auto' />))
+        } */}
+        
         <button className='btn btn-sm btn-circle btn-outline border-gray-300 absolute top-1 right-1 opacity-50'
           onClick={hdlClose}
         >x</button>
