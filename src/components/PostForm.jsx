@@ -20,9 +20,17 @@ export default function PostForm(props) {
   };
   const hdlCreatePost = async (e) => {
     try {
-      let body = { message: message };
-      let newPost = await createPost(body, token);
-      getAllPosts(token);
+      // let body = { message: message };
+      const body = new FormData()
+      body.append('message', message)
+      if(file) {
+        body.append('image', file)
+      }
+      for (let [key, value] of body.entries()) {
+        console.log(`${key}: ${value} `);
+      }
+      // const newPost = await createPost(body, token);
+      // getAllPosts(token);
       e.target.closest("dialog").close();
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
