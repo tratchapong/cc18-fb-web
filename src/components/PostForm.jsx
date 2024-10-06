@@ -12,6 +12,7 @@ export default function PostForm(props) {
   const createPost = usePostStore((state) => state.createPost);
   const getAllPosts = usePostStore((state) => state.getAllPosts);
   const [message, setMessage] = useState("");
+  const [addPic, setAddPic] = useState(false)
 
   const hdlChange = (e) => {
     setMessage(e.target.value);
@@ -55,12 +56,13 @@ export default function PostForm(props) {
         value={message}
         onChange={hdlChange}
       ></textarea>
-      {/* Add Picture area */}
-      <AddPicture />
+      {addPic && <AddPicture closeMe={()=>setAddPic(false)} />}
       <div className="flex border rounded-lg p-2 justify-between items-center">
         <p>add with your post</p>
         <div className="flex gap-2">
-          <div className="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex justify-center items-center active:scale-110">
+          <div className="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex justify-center items-center active:scale-110"
+            onClick={()=>setAddPic(prv=>!prv)}
+          >
             <PhotoIcon className="w-7 h-7" />
           </div>
         </div>
