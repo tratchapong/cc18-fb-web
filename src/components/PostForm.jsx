@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Avatar from "./Avatar";
 import useUserStore from "../stores/userStore";
 import { PhotoIcon } from "../icons";
-import axios from "axios";
 import { toast } from "react-toastify";
 import usePostStore from "../stores/postStore";
+import AddPicture from "./AddPicture";
 
 export default function PostForm(props) {
   const user = useUserStore((state) => state.user);
@@ -56,6 +56,7 @@ export default function PostForm(props) {
         onChange={hdlChange}
       ></textarea>
       {/* Add Picture area */}
+      <AddPicture />
       <div className="flex border rounded-lg p-2 justify-between items-center">
         <p>add with your post</p>
         <div className="flex gap-2">
