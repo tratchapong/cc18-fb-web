@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import useUserStore from '../stores/userStore'
 import { PhotoIcon } from '../icons'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
@@ -14,15 +13,23 @@ export default function PostForm() {
 	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const [message, setMessage] = useState('')
 	const [addPic, setAddPic] = useState(false)
+	const [file, setFile] = useState(null)
 
 	const hdlChange = e => {
 		setMessage(e.target.value)
 	}
 	const hdlCreatePost = async e => {
 		try {
-			let body = { message : message}
-			let newPost = await createPost(body, token)
-			getAllPosts(token)
+			const body = new FormData()
+			body.append('message', message)
+			if(file) {
+				body.append('image', file)
+			}
+			// for(let [key, value] of body.entries()) {
+			// 	console.log(key, value)
+			// }
+			
+
 			e.target.closest('dialog').close()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
@@ -56,7 +63,10 @@ export default function PostForm() {
 				onChange={hdlChange}
 				rows={message.split('\n').length}
 			></textarea>
-			{addPic && <AddPicture closeMe={()=>setAddPic(false)} />}
+			{addPic && 
+				<AddPicture closeMe={()=>setAddPic(false)} 
+					file={file} setFile={setFile}
+				/>}
 			<div className="flex border rounded-lg p-2 justify-between items-center">
 				<p>add with your post</p>
 				<div className="flex gap-2">
