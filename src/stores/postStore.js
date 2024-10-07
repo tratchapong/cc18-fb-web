@@ -5,11 +5,14 @@ const usePostStore = create( (set, get) => ({
 	posts : [],
 	currentPost : null,
 	loading: false,
-	createPost : async (body, token) => {
+	createPost : async (body, token, user) => {
 		const rs = await axios.post('http://localhost:8899/post', body , {
 			headers : { Authorization : `Bearer ${token}`}
 		})	
-		return rs.data
+		set(state => ({
+			posts : [ {...rs.data, user}, ...state.posts]
+		}))
+		
 	},
 	getAllPosts : async (token) => {
 		set({loading: true})
