@@ -30,6 +30,11 @@ const usePostStore = create( (set, get) => ({
 	},
 	setCurrentPost : (post) => {
 		set({currentPost : post})
+	},
+	updatePost : async (body, token, id) => {
+		const rs = await axios.put(`http://localhost:8899/post/${id}`, body , {
+			headers : { Authorization : `Bearer ${token}`}
+		})
 	}
 }))
 

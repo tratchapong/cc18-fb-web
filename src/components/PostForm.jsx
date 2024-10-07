@@ -27,17 +27,6 @@ export default function PostForm() {
 			if(file) {
 				body.append('image', file)
 			}
-			// for multiple files : use for..of to body.append
-			// ----
-			// ex. state : files
-			// let files
-			// for(let el of files) {
-			// 	body.append(el)
-			// }
-			// ----
-			// for(let [key, value] of body.entries()) {
-			// 	console.log(key, value)
-			// }
 			const rs = await createPost(body, token, user)
 			// getAllPosts(token)
 			e.target.closest('dialog').close()
@@ -86,12 +75,13 @@ export default function PostForm() {
 					<div
 						onClick={()=>setAddPic(prv=>!prv)}
 						className="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex justify-center items-center
-	active:scale-110">
+	            active:scale-110">
 						<PhotoIcon className="w-7 h-7" />
 					</div>
 				</div>
 			</div>
-			<button className={`btn btn-sm ${message.trim() ? 'btn-primary' : 'btn-disabled'}`} onClick={hdlCreatePost}>Create Post</button>
+			<button className={`btn btn-sm ${message.trim() ? 'btn-primary' : 'btn-disabled'}`} 
+        onClick={hdlCreatePost}>Create Post</button>
 		</div>
 	)
 }
