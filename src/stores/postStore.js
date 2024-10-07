@@ -8,8 +8,7 @@ const usePostStore = create( (set, get) => ({
 	createPost : async (body, token) => {
 		const rs = await axios.post('http://localhost:8899/post', body , {
 			headers : { Authorization : `Bearer ${token}`}
-		})
-		
+		})	
 		return rs.data
 	},
 	getAllPosts : async (token) => {

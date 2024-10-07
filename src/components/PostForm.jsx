@@ -28,8 +28,8 @@ export default function PostForm() {
 			// for(let [key, value] of body.entries()) {
 			// 	console.log(key, value)
 			// }
-			
-
+			const rs = await createPost(body, token)
+			getAllPosts(token)
 			e.target.closest('dialog').close()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message

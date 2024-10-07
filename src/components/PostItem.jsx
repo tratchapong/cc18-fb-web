@@ -31,7 +31,11 @@ export default function PostItem(props) {
 				</div>
 				{/* Post message */}
 				<p>{post.message}</p>
-
+				{post.image && (
+					<img src={post.image} alt="post-pic"
+						className='p-4 max-h-[500px] object-contain'
+					/>
+				)}
 
 				<div className="divider h-0 my-0"></div>
 				<div className="flex gap-3 justify-between">
