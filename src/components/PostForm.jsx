@@ -5,6 +5,7 @@ import { PhotoIcon } from '../icons'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import usePostStore from '../stores/postStore'
+import AddPicture from './AddPicture'
 
 export default function PostForm() {
 	const user = useUserStore(state => state.user)
@@ -12,6 +13,7 @@ export default function PostForm() {
 	const createPost = usePostStore(state => state.createPost)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const [message, setMessage] = useState('')
+	const [addPic, setAddPic] = useState(false)
 
 	const hdlChange = e => {
 		setMessage(e.target.value)
@@ -52,19 +54,21 @@ export default function PostForm() {
 				placeholder={`what do you think? ${user.firstName}`}
 				value={message}
 				onChange={hdlChange}
+				rows={message.split('\n').length}
 			></textarea>
-			{/* Add Picture area */}
+			{addPic && <AddPicture closeMe={()=>setAddPic(false)} />}
 			<div className="flex border rounded-lg p-2 justify-between items-center">
 				<p>add with your post</p>
 				<div className="flex gap-2">
 					<div
+						onClick={()=>setAddPic(prv=>!prv)}
 						className="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 flex justify-center items-center
 	active:scale-110">
 						<PhotoIcon className="w-7 h-7" />
 					</div>
 				</div>
 			</div>
-			<button className='btn btn-sm' onClick={hdlCreatePost}>Create Post</button>
+			<button className={`btn btn-sm ${message.trim() ? 'btn-primary' : 'btn-disabled'}`} onClick={hdlCreatePost}>Create Post</button>
 		</div>
 	)
 }
