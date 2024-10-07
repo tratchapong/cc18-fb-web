@@ -24,7 +24,12 @@ const usePostStore = create( (set, get) => ({
 		const rs = await axios.delete(`http://localhost:8899/post/${id}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
-
+		set(state => ({
+			posts: state.posts.filter(el => el.id !== id)
+		}))
+	},
+	setCurrentPost : (post) => {
+		set({currentPost : post})
 	}
 }))
 

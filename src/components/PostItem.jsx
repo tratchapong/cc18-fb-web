@@ -10,6 +10,7 @@ export default function PostItem(props) {
 	const token = useUserStore(state => state.token)
 	const deletePost = usePostStore(state=> state.deletePost)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
+	const setCurrentPost = usePostStore(state => state.setCurrentPost)
 
 	const hdlDelete = async e => {
 		try {
@@ -17,12 +18,17 @@ export default function PostItem(props) {
 				return console.log('Cancel delete')
 			}
 		await deletePost(token,post.id)	
-		getAllPosts(token)
+		// getAllPosts(token)
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			toast.error(errMsg)
 			console.log(err)
 		}
+	}
+
+	const hdlShowEditModal = e => {
+		setCurrentPost(post)
+		document.getElementById('editform-modal').showModal()
 	}
 	return (
 		<div className="card bg-base-100 shadow-xl">
@@ -51,7 +57,7 @@ export default function PostItem(props) {
 									tabIndex={0}
 									className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
 								>
-									<li>
+									<li onClick={hdlShowEditModal}>
 										<a>Edit</a>
 									</li>
 									<li onClick={hdlDelete}>
