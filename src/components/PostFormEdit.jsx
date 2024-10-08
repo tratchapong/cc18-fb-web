@@ -12,8 +12,8 @@ export default function PostFormEdit() {
 	const createPost = usePostStore(state => state.createPost)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const currentPost = usePostStore(state => state.currentPost)
-	// console.log(currentPost)
-	// const [message, setMessage] = useState('')
+	const updatePost = usePostStore(state => state.updatePost)
+
 	const [message, setMessage] = useState(currentPost.message)
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)
@@ -30,8 +30,8 @@ export default function PostFormEdit() {
 			if(file) {
 				body.append('image', file)
 			}
-			// const rs = await createPost(body, token, user)
-			// getAllPosts(token)
+			await updatePost(body, token, currentPost.id)
+			getAllPosts(token)
 			e.target.closest('dialog').close()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message

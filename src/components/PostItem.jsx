@@ -3,6 +3,7 @@ import { CloseIcon, CommentIcon, LikeIcon, MenuIcon, PhotoIcon, ShareIcon, Smile
 import useUserStore from '../stores/userStore'
 import usePostStore from '../stores/postStore'
 import { toast } from 'react-toastify'
+import TimeAgo from 'react-timeago'
 
 export default function PostItem(props) {
 	const { post } = props
@@ -40,7 +41,9 @@ export default function PostItem(props) {
 							className='w-11 h11 rounded-full' />
 						<div className="flex flex-col">
 							<p className='font-bold'>{post.user.firstName} {post.user.lastName}</p>
-							<p className="text-xs font-bold opacity-50">59 min.</p>
+							<p className="text-xs font-bold opacity-50">
+								<TimeAgo date={post.createdAt} />
+							</p>
 						</div>
 					</div>
 					<div className="flex gap-2">
