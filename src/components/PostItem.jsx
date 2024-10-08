@@ -112,7 +112,7 @@ export default function PostItem(props) {
 					</div>
 				</div>
 				<div className="divider h-0 my-0"></div>
-				<CommentContainer />
+				<CommentContainer postId={post.id}/>
 			</div>
 		</div>
 	)
