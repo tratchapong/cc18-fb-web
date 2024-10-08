@@ -1,5 +1,6 @@
 import React from 'react'
 import Avatar from './Avatar'
+import { SendMessageIcon } from '../icons'
 
 export default function CommentForm() {
 	return (
@@ -13,7 +14,7 @@ export default function CommentForm() {
 				></textarea>
 			</div>
 			<button className='btn btn-circle btn-sm absolute bottom-1 right-2'>
-				Send
+				<SendMessageIcon className='w-6 ms-1' />
 			</button>
 		</div>
 	)
