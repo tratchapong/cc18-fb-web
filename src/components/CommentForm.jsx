@@ -8,6 +8,7 @@ import useUserStore from '../stores/userStore'
 export default function CommentForm(props) {
 	const { postId } = props
 	const token = useUserStore(state => state.token)
+	const user = useUserStore(state => state.user)
 	const createComment = usePostStore(state => state.createComment)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
 
@@ -35,11 +36,13 @@ export default function CommentForm(props) {
 	return (
 		<div className='relative'>
 			<div className="flex gap-3 items-start">
-				<Avatar className='w-11 h-11 rounded-full' />
+				<Avatar className='w-11 h-11 rounded-full' 
+					imgSrc={user.profileImage}
+				/>
 				<textarea 
 					className='textarea w-full p-1 leading-5'
 					rows={message.split('\n').length}
-					placeholder={`comment by Andy Codecamp`}
+					placeholder={`comment by ${user.firstName} ${user.lastName} `}
 					value={message}
 					onChange={e => setMessage(e.target.value)}
 				></textarea>
