@@ -4,6 +4,7 @@ import useUserStore from '../stores/userStore'
 import usePostStore from '../stores/postStore'
 import { toast } from 'react-toastify'
 import TimeAgo from 'react-timeago'
+import CommentContainer from './CommentContainer'
 
 export default function PostItem(props) {
 	const { post } = props
@@ -83,6 +84,17 @@ export default function PostItem(props) {
 						className='p-4 max-h-[500px] object-contain'
 					/>
 				)}
+				<div className="flex justify-between items-center pe-4">
+					<div className="avatar items-end cursor-pointer gap-1">
+						<div className="w-7 h-7 rounded-full !flex justify-center items-center bg-blue-200">
+							<LikeIcon className='w-5' />
+						</div>
+						<p>99 likes</p>
+					</div>
+					<div className="flex gap-2">
+						<p className="opacity-60">9 comments</p>
+					</div>
+				</div>
 
 				<div className="divider h-0 my-0"></div>
 				<div className="flex gap-3 justify-between">
@@ -100,6 +112,7 @@ export default function PostItem(props) {
 					</div>
 				</div>
 				<div className="divider h-0 my-0"></div>
+				<CommentContainer />
 			</div>
 		</div>
 	)
