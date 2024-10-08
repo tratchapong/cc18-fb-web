@@ -2,9 +2,15 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import { SendMessageIcon } from '../icons'
 import { toast } from 'react-toastify'
+import usePostStore from '../stores/postStore'
+import useUserStore from '../stores/userStore'
 
 export default function CommentForm(props) {
 	const { postId } = props
+	const token = useUserStore(state => state.token)
+	const createComment = usePostStore(state => state.createComment)
+	const getAllPosts = usePostStore(state => state.getAllPosts)
+
 	const [message, setMessage] = useState('')
 
 	const hdlSendComment = async e => {
@@ -17,6 +23,9 @@ export default function CommentForm(props) {
 			message : message,
 			postId : postId
 		}
+		await createComment(body ,token)
+		getAllPosts(token)
+		setMessage('')
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			toast.error(errMsg)
