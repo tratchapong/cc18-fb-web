@@ -8,7 +8,7 @@ import CommentContainer from './CommentContainer'
 
 export default function PostItem(props) {
 	const { post } = props
-	console.log(post.likes)
+	// console.log(post.likes)
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const deletePost = usePostStore(state=> state.deletePost)

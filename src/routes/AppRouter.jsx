@@ -5,6 +5,8 @@ import SidebarMenu from '../components/SidebarMenu'
 import PostContainer from '../components/PostContainer'
 import SidebarContact from '../components/SidebarContact'
 import useUserStore from '../stores/userStore'
+import Profile from '../pages/Profile'
+import Friends from '../pages/Friends'
 
 const guestRouter = createBrowserRouter([
 	{ path : '/', element: <Login />},
@@ -19,11 +21,11 @@ const userRouter = createBrowserRouter([
 				<PostContainer />
 				<SidebarContact />
 			</>},
-			{path: 'friends', element : <p>Friends Page</p>},
+			{path: 'friends', element : <Friends />},
+			{path: 'profile', element : <Profile />},
 			{path: '*', element : <Navigate to='/' />}
 		]
-	},
-	
+	},	
 ])
 
 export default function AppRouter() {

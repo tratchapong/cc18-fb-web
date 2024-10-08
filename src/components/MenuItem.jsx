@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default function MenuItem(props) {
-	const {icon : Icon , text, ...restProps } = props
+	const {icon : Icon , text, whenClick, ...restProps } = props
 	return (
-		<button className="btn bg-opacity-0 border-none shadow-none justify-start gap-2 hover:bg-opacity-20 ">
+		<button className="btn bg-opacity-0 border-none shadow-none justify-start gap-2 hover:bg-opacity-20" onClick={whenClick}>
 			<Icon {...restProps} />
 			{text}
 		</button>
