@@ -8,13 +8,24 @@ import CommentContainer from './CommentContainer'
 
 export default function PostItem(props) {
 	const { post } = props
-	// console.log(post)
+	console.log(post.likes)
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const deletePost = usePostStore(state=> state.deletePost)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const setCurrentPost = usePostStore(state => state.setCurrentPost)
+	const createLike = usePostStore(state => state.createLike)
+	const unLike = usePostStore(state => state.unLike)
 
+	const haveLike = () => post.likes.findIndex(el => el.userId === user.id) !== -1
+	const hdlLikeClick = async e => {
+		if(haveLike()) {
+			await unLike(token, post.id)
+		}else {
+			await createLike(token, {postId : post.id})
+		}
+		getAllPosts(token)
+	}
 	const hdlDelete = async e => {
 		try {
 			if(!confirm('Delete this post?')) {
@@ -90,7 +101,7 @@ export default function PostItem(props) {
 						<div className="w-7 h-7 rounded-full !flex justify-center items-center bg-blue-200">
 							<LikeIcon className='w-5' />
 						</div>
-						<p>99 likes</p>
+						<p>{post.likes.length} likes</p>
 					</div>
 					<div className="flex gap-2">
 						<p className="opacity-60"> {post.comments.length} comments</p>
@@ -99,8 +110,11 @@ export default function PostItem(props) {
 
 				<div className="divider h-0 my-0"></div>
 				<div className="flex gap-3 justify-between">
-					<div className="flex gap-3 justify-center cursor-pointer hover:bg-gray-300 rounded-lg flex-1 py-2 ">
-						<LikeIcon className='w-6' />
+					<div className={`flex gap-3 justify-center cursor-pointer hover:bg-gray-300 rounded-lg flex-1 py-2
+							${haveLike() ? 'bg-blue-300 text-white' : ''}`}
+						onClick={hdlLikeClick}
+					>
+						<LikeIcon className='w-6 ' />
 						Like
 					</div>
 					<div className="flex gap-3 justify-center cursor-pointer hover:bg-gray-300 rounded-lg flex-1 py-2 ">
