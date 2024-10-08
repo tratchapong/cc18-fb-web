@@ -18,6 +18,7 @@ export default function PostFormEdit() {
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)
 	const [loading, setLoading] = useState(false)
+	const [removePic, setRemovePic] = useState(false)
 
 	const hdlChange = e => {
 		setMessage(e.target.value)
@@ -29,6 +30,9 @@ export default function PostFormEdit() {
 			body.append('message', message)
 			if(file) {
 				body.append('image', file)
+			}
+			if(removePic) {
+				body.append('removePic', true)
 			}
 			await updatePost(body, token, currentPost.id)
 			getAllPosts(token)
@@ -68,10 +72,10 @@ export default function PostFormEdit() {
 				onChange={hdlChange}
 				rows={message.split('\n').length}
 			></textarea>
-			{currentPost.image && (
+			{currentPost.image && !removePic && (
 				<div className='border flex justify-evenly items-center'>
 					<img src={currentPost.image} className='h-[100px] object-contain' />
-					<button className='btn btn-sm'>Remove</button>
+					<button className='btn btn-sm' onClick={()=>setRemovePic(true)} >Remove</button>
 				</div>
 			) }
 			{addPic && 
