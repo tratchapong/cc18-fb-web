@@ -10,7 +10,7 @@ const usePostStore = create( (set, get) => ({
 			headers : { Authorization : `Bearer ${token}`}
 		})	
 		set(state => ({
-			posts : [ {...rs.data, user}, ...state.posts]
+			posts : [ {...rs.data, user, likes: [], comments: []}, ...state.posts]
 		}))
 	},
 	getAllPosts : async (token) => {

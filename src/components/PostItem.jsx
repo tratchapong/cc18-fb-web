@@ -19,6 +19,9 @@ export default function PostItem(props) {
 
 	const haveLike = () => post.likes.findIndex(el => el.userId === user.id) !== -1
 	const hdlLikeClick = async e => {
+		if(post.userId === user.id) {
+			return toast.info('Please not like your own post')
+		}
 		if(haveLike()) {
 			await unLike(token, post.id)
 		}else {
