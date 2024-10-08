@@ -8,6 +8,7 @@ import CommentContainer from './CommentContainer'
 
 export default function PostItem(props) {
 	const { post } = props
+	// console.log(post)
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const deletePost = usePostStore(state=> state.deletePost)
@@ -112,7 +113,7 @@ export default function PostItem(props) {
 					</div>
 				</div>
 				<div className="divider h-0 my-0"></div>
-				<CommentContainer postId={post.id}/>
+				<CommentContainer postId={post.id} comments={post.comments}/>
 			</div>
 		</div>
 	)
