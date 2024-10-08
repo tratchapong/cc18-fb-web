@@ -68,6 +68,12 @@ export default function PostFormEdit() {
 				onChange={hdlChange}
 				rows={message.split('\n').length}
 			></textarea>
+			{currentPost.image && (
+				<div className='border flex justify-evenly items-center'>
+					<img src={currentPost.image} className='h-[100px] object-contain' />
+					<button className='btn btn-sm'>Remove</button>
+				</div>
+			) }
 			{addPic && 
 				<AddPicture closeMe={()=>setAddPic(false)} 
 					file={file} setFile={setFile}
