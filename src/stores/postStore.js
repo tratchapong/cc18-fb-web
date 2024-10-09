@@ -13,12 +13,13 @@ const usePostStore = create( (set, get) => ({
 			posts : [ {...rs.data, user, likes: [], comments: []}, ...state.posts]
 		}))
 	},
-	getAllPosts : async (token) => {
+	getAllPosts : async (token,page=1, perPage=5) => {
 		set({loading: true})
-		const rs = await  axios.get('http://localhost:8899/post', {
+		const rs = await  axios.get(`http://localhost:8899/post?page=${page}&perPage=${perPage}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
-		set({ posts: rs.data.posts , loading: false})
+		// set({ posts: rs.data.posts , loading: false})
+		set(state => ({posts: [...state.posts, ...rs.data.posts], loading: false}))
 	},
 	deletePost : async ( token, id) => {
 		const rs = await axios.delete(`http://localhost:8899/post/${id}`, {

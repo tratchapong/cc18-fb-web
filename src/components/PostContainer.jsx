@@ -11,11 +11,11 @@ export default function PostContainer() {
 	const token = useUserStore(state => state.token)
 	const currentPost = usePostStore(state => state.currentPost)
 	const setCurrentPost = usePostStore(state => state.setCurrentPost)
-	const [isOpen, setIsOpen] = useState(true)
+	const [page, setPage] = useState(1)
 
 	useEffect( ()=>{
-		getAllPosts(token)
-	},[] )
+		getAllPosts(token,page,5)
+	},[page] )
 	
 	// console.log(posts)
 	return (
@@ -25,7 +25,9 @@ export default function PostContainer() {
 			{ posts.map(el => (
 				<PostItem key={el.id} post={el} />
 			))}
+			<button className='btn btn-primary' onClick={()=>setPage(prv => prv+1)}>Next</button>
 		</div>
+
 		{/* modal */}
 		<dialog id="editform-modal" className="modal" onClose={()=>setCurrentPost(null)}>
 				<div className="modal-box">

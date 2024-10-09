@@ -8,6 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 createRoot(document.getElementById('root')).render(
   <>
     <AppRouter />
-    <ToastContainer />
+    <ToastContainer position='bottom-right' />
   </>
 )
