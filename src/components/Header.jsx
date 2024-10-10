@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useUserStore from "../stores/userStore";
 import { useShallow } from "zustand/shallow";
 import MenuItem from "./MenuItem";
+import usePostStore from "../stores/postStore";
 
 export default function Header() {
   // const logout = useUserStore(state => state.logout)
@@ -23,10 +24,13 @@ export default function Header() {
   const { user, logout } = useUserStore(
     useShallow((state) => ({ user: state.user, logout: state.logout }))
   );
+  const resetPosts = usePostStore(state => state.resetPosts)
 
-  // const {user, logout} = useUserStore() *** No good ***
+  const hdlLogout = e => {
+    resetPosts()
+    logout()
+  }
 
-  // console.log(user)
   return (
     <header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
       {/* Logo + input */}
@@ -104,7 +108,7 @@ export default function Header() {
                 className="w-11 h-11 rounded-full"
               />
             </li>
-            <li onClick={logout}>
+            <li onClick={hdlLogout}>
               <a>Logout</a>
             </li>
           </ul>

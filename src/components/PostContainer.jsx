@@ -14,10 +14,6 @@ export default function PostContainer() {
 	const setCurrentPost = usePostStore(state => state.setCurrentPost)
 	const [page, setPage] = useState(1)
 
-	useEffect(() => {
-		getAllPosts(token, page, 3)
-	}, [page])
-
 	const handleOnScroll = () => {
 		if (
 			window.scrollY + window.innerHeight >=
@@ -28,16 +24,18 @@ export default function PostContainer() {
 	};
 
 	useEffect(() => {
+		getAllPosts(token, page, 3)
+	}, [page])
+
+	useEffect(() => {
 		posts.length < totalRows
 			? window.addEventListener('scroll', handleOnScroll)
 			: window.removeEventListener('scroll', handleOnScroll)
 		return () => {
 			window.removeEventListener('scroll', handleOnScroll)
-
 		}
 	}, [posts.length])
 
-	// console.log(posts)
 	return (
 		<>
 			<div className="w-[680px] mx-auto min-h-screen my-3 flex flex-col gap-4 rounded-lg ">
@@ -45,9 +43,11 @@ export default function PostContainer() {
 				{posts.map(el => (
 					<PostItem key={el.id} post={el} />
 				))}
-				{/* <button 
+
+				{/* <button
 					className={`btn ${posts.length >= totalRows ? 'btn-disabled' : 'btn-primary'}`}
 					onClick={() => setPage(prv => prv + 1)}>Next</button> */}
+
 				{posts.length >= totalRows && <button
 					className='btn btn-primary'
 					onClick={() => {

@@ -19,7 +19,7 @@ const usePostStore = create( (set, get) => ({
 		const rs = await  axios.get(`http://localhost:8899/post?page=${page}&perPage=${perPage}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
-		// set({ posts: rs.data.posts , loading: false})
+		console.log(rs.data.posts)
 		set(state => ({posts: [...state.posts, ...rs.data.posts], loading: false, totalRows: rs.data.rows}))
 	},
 	deletePost : async ( token, id) => {
@@ -37,6 +37,10 @@ const usePostStore = create( (set, get) => ({
 		const rs = await axios.put(`http://localhost:8899/post/${id}`, body, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})
+		set(state => ({
+			posts : state.posts.map(el=> el.id===id ? {...el, ...rs.data} : el  )
+		}))
+		console.log(get().posts)
 	},
 	createComment : async (body, token) => {
 		const rs = await axios.post('http://localhost:8899/comment' ,body, {
@@ -53,6 +57,9 @@ const usePostStore = create( (set, get) => ({
 			headers : { Authorization : `Bearer ${token}`}	
 		})
 	},
+	resetPosts : () => {
+		set(state => ({ posts : [], totalRows : 0, currentPost: null, loading: false}))
+	}
 }))
 
 export default usePostStore
