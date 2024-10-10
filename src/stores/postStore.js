@@ -3,6 +3,7 @@ import {create} from 'zustand'
 
 const usePostStore = create( (set, get) => ({
 	posts : [],
+	totalRows : 0,
 	currentPost : null,
 	loading: false,
 	createPost : async (body, token, user) => {
@@ -19,7 +20,7 @@ const usePostStore = create( (set, get) => ({
 			headers : { Authorization : `Bearer ${token}`}
 		})
 		// set({ posts: rs.data.posts , loading: false})
-		set(state => ({posts: [...state.posts, ...rs.data.posts], loading: false}))
+		set(state => ({posts: [...state.posts, ...rs.data.posts], loading: false, totalRows: rs.data.rows}))
 	},
 	deletePost : async ( token, id) => {
 		const rs = await axios.delete(`http://localhost:8899/post/${id}`, {
