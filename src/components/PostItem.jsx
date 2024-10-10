@@ -27,7 +27,7 @@ export default function PostItem(props) {
 		}else {
 			await createLike(token, {postId : post.id})
 		}
-		getAllPosts(token)
+		// getAllPosts(token)
 	}
 	const hdlDelete = async e => {
 		try {

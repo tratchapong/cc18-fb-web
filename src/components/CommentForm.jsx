@@ -25,7 +25,7 @@ export default function CommentForm(props) {
 			postId : postId
 		}
 		await createComment(body ,token)
-		getAllPosts(token)
+		// getAllPosts(token)
 		setMessage('')
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message

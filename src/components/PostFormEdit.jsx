@@ -35,7 +35,7 @@ export default function PostFormEdit() {
 				body.append('removePic', true)
 			}
 			await updatePost(body, token, currentPost.id)
-			getAllPosts(token)
+			// getAllPosts(token)
 			e.target.closest('dialog').close()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
