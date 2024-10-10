@@ -16,20 +16,28 @@ import useUserStore from "../stores/userStore";
 import { useShallow } from "zustand/shallow";
 import MenuItem from "./MenuItem";
 import usePostStore from "../stores/postStore";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   // const logout = useUserStore(state => state.logout)
   // const user = useUserStore(state => state.user)
-	const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, logout } = useUserStore(
     useShallow((state) => ({ user: state.user, logout: state.logout }))
   );
-  const resetPosts = usePostStore(state => state.resetPosts)
+  const resetPosts = usePostStore((state) => state.resetPosts);
 
-  const hdlLogout = e => {
-    resetPosts()
-    logout()
-  }
+  const hdlLogout = (e) => {
+    resetPosts();
+    logout();
+  };
 
   return (
     <header className="h-14 w-full fixed top-0 z-10 px-3 flex justify-between shadow-lg bg-white">
@@ -88,7 +96,37 @@ export default function Header() {
             <NotificationIcon className="w-9" />
           </div>
         </div>
-        <div className="dropdown dropdown-end mt-2">
+
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+          <Avatar
+              className="w-11 h-11 rounded-full"
+              imgSrc={user.profileImage}
+              menu={true}
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuItem>
+            <MenuItem
+                icon={Avatar}
+                text={`${user.firstName} ${user.lastName}`}
+                imgSrc={user.profileImage}
+                className="w-11 h-11 rounded-full"
+              />
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={hdlLogout}>Logout</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </header>
+  );
+}
+
+        {/* <div className="dropdown dropdown-end mt-2">
           <div tabIndex={0} role="button" className="">
             <Avatar
               className="w-11 h-11 rounded-full"
@@ -112,8 +150,4 @@ export default function Header() {
               <a>Logout</a>
             </li>
           </ul>
-        </div>
-      </div>
-    </header>
-  );
-}
+        </div> */}
