@@ -15,8 +15,27 @@ export default function PostContainer() {
 	const [page, setPage] = useState(1)
 
 	useEffect(() => {
-		getAllPosts(token, page, 5)
+		getAllPosts(token, page, 3)
 	}, [page])
+
+  const handleOnScroll = () => {
+    if (
+      window.scrollY + window.innerHeight >=
+      document.documentElement.scrollHeight
+    ) {
+      setPage((prev) => prev + 1);
+    }
+  };
+
+	useEffect(()=>{
+		posts.length < totalRows 
+			? window.addEventListener('scroll', handleOnScroll)
+			: window.removeEventListener('scroll', handleOnScroll)
+			return ()=> {
+			window.removeEventListener('scroll', handleOnScroll)
+
+		}
+	},[posts.length])
 
 	// console.log(posts)
 	return (
