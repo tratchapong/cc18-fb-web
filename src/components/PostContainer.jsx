@@ -18,24 +18,24 @@ export default function PostContainer() {
 		getAllPosts(token, page, 3)
 	}, [page])
 
-  const handleOnScroll = () => {
-    if (
-      window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight
-    ) {
-      setPage((prev) => prev + 1);
-    }
-  };
+	const handleOnScroll = () => {
+		if (
+			window.scrollY + window.innerHeight >=
+			document.documentElement.scrollHeight
+		) {
+			setPage((prev) => prev + 1);
+		}
+	};
 
-	useEffect(()=>{
-		posts.length < totalRows 
+	useEffect(() => {
+		posts.length < totalRows
 			? window.addEventListener('scroll', handleOnScroll)
 			: window.removeEventListener('scroll', handleOnScroll)
-			return ()=> {
+		return () => {
 			window.removeEventListener('scroll', handleOnScroll)
 
 		}
-	},[posts.length])
+	}, [posts.length])
 
 	// console.log(posts)
 	return (
@@ -45,9 +45,17 @@ export default function PostContainer() {
 				{posts.map(el => (
 					<PostItem key={el.id} post={el} />
 				))}
-				<button 
+				{/* <button 
 					className={`btn ${posts.length >= totalRows ? 'btn-disabled' : 'btn-primary'}`}
-					onClick={() => setPage(prv => prv + 1)}>Next</button>
+					onClick={() => setPage(prv => prv + 1)}>Next</button> */}
+				{posts.length >= totalRows && <button
+					className='btn btn-primary'
+					onClick={() => {
+						window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+					}}
+				>
+					Scroll to Top
+				</button>}
 			</div>
 
 			{/* modal */}
