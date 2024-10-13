@@ -6,11 +6,11 @@ import { toast } from 'react-toastify'
 import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
 
-export default function PostFormEdit() {
+export default function PostFormEdit(props) {
+	const {closeMe} =props
+	console.log(scrollY)
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
-	const createPost = usePostStore(state => state.createPost)
-	const getAllPosts = usePostStore(state => state.getAllPosts)
 	const currentPost = usePostStore(state => state.currentPost)
 	const updatePost = usePostStore(state => state.updatePost)
 
@@ -35,8 +35,7 @@ export default function PostFormEdit() {
 				body.append('removePic', true)
 			}
 			await updatePost(body, token, currentPost.id)
-			// getAllPosts(token)
-			e.target.closest('dialog').close()
+			closeMe()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
@@ -48,7 +47,6 @@ export default function PostFormEdit() {
 	return (
 		<div className="flex flex-col gap-2">
 			{ loading && <span className="loading loading-dots loading-xs"></span> }
-			<h3 className="text-xl text-center">Edit post</h3>
 			<div className="divider mt-1 mb-0"></div>
 			<div className="flex gap-2">
 				<Avatar

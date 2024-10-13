@@ -6,7 +6,8 @@ import { toast } from 'react-toastify'
 import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
 
-export default function PostForm() {
+export default function PostForm(props) {
+	const {closeMe, scrollY} = props
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const createPost = usePostStore(state => state.createPost)
@@ -27,20 +28,8 @@ export default function PostForm() {
 			if(file) {
 				body.append('image', file)
 			}
-			// for multiple files : use for..of to body.append
-			// ----
-			// ex. state : files
-			// let files
-			// for(let el of files) {
-			// 	body.append(el)
-			// }
-			// ----
-			// for(let [key, value] of body.entries()) {
-			// 	console.log(key, value)
-			// }
 			const rs = await createPost(body, token, user)
-			// getAllPosts(token)
-			e.target.closest('dialog').close()
+			closeMe()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
@@ -52,7 +41,7 @@ export default function PostForm() {
 	return (
 		<div className="flex flex-col gap-2">
 			{ loading && <span className="loading loading-dots loading-xs"></span> }
-			<h3 className="text-xl text-center">Create post</h3>
+			{/* <h3 className="text-xl text-center">Create post</h3> */}
 			<div className="divider mt-1 mb-0"></div>
 			<div className="flex gap-2">
 				<Avatar
