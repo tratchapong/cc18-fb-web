@@ -3,6 +3,7 @@ import Avatar from './Avatar'
 
 export default function CommentItem(props) {
 	const {comment} = props
+
 	return (
 		<div className='flex gap-2'>
 			<Avatar className='w-11 h-11 rounded-full' 

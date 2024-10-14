@@ -21,7 +21,7 @@ export default function PostContainer() {
   const token = useUserStore((state) => state.token);
   const currentPost = usePostStore((state) => state.currentPost);
   const setCurrentPost = usePostStore((state) => state.setCurrentPost);
-  const [page, setPage] = useState(1);
+  const [skip, setSkip] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOnScroll = () => {
@@ -29,13 +29,13 @@ export default function PostContainer() {
       window.scrollY + window.innerHeight >=
       document.documentElement.scrollHeight
     ) {
-      setPage((prev) => prev + 1);
+      setSkip(posts.length);
     }
   };
 
   useEffect(() => {
-    getAllPosts(token, page, 3);
-  }, [page]);
+    getAllPosts(token, skip, 3);
+  }, [skip]);
 
   useEffect(() => {
     posts.length < totalRows
@@ -67,7 +67,7 @@ export default function PostContainer() {
 
         {/* <button
 					className={`btn ${posts.length >= totalRows ? 'btn-disabled' : 'btn-primary'}`}
-					onClick={() => setPage(prv => prv + 1)}>Next</button> */}
+					onClick={() => setSkip(prv => prv + 3)}>Next</button> */}
 
         {posts.length >= totalRows && (
           <button
