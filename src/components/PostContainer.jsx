@@ -24,6 +24,7 @@ export default function PostContainer() {
   const [skip, setSkip] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
+
   const handleOnScroll = () => {
     if (
       window.scrollY + window.innerHeight >=

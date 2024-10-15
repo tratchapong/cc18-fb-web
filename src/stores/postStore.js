@@ -2,8 +2,9 @@ import axios from 'axios'
 import {create} from 'zustand'
 import {produce} from 'immer'
 import useUserStore from './userStore'
+import zukeeper from 'zukeeper'
 
-const usePostStore = create( (set, get) => ({
+const usePostStore = create(zukeeper( (set, get) => ({
 	posts : [],
 	totalRows : 0,
 	currentPost : null,
@@ -20,7 +21,8 @@ const usePostStore = create( (set, get) => ({
 		set( produce( state => {state.posts.unshift( {...rs.data, user, likes:[], comments:[]}) }) )
 	},
 	getAllPosts : async (token,skip=get().posts.length, perPage=3) => {
-		set({loading: true})
+		set(produce(state =>  {state.loading = true }))
+		// set({loading: true})
 		const rs = await  axios.get(`http://localhost:8899/post?skip=${skip}&perPage=${perPage}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
@@ -31,6 +33,7 @@ const usePostStore = create( (set, get) => ({
 			state.loading = false
 			state.totalRows = rs.data.rows
 		}))
+		set({loading: false})
 	},
 	deletePost : async ( token, id) => {
 		const rs = await axios.delete(`http://localhost:8899/post/${id}`, {
@@ -109,6 +112,8 @@ const usePostStore = create( (set, get) => ({
 	resetPosts : () => {
 		set(state => ({ posts : [], totalRows : 0, currentPost: null, loading: false}))
 	}
-}))
+})))
+
+window.store = usePostStore
 
 export default usePostStore
