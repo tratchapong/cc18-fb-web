@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Avatar from './Avatar'
 import useUserStore from '../stores/userStore'
 import { PhotoIcon } from '../icons'
@@ -12,30 +12,32 @@ export default function PostForm(props) {
 	const token = useUserStore(state => state.token)
 	const createPost = usePostStore(state => state.createPost)
 	const getAllPosts = usePostStore(state => state.getAllPosts)
+	const loading = usePostStore(state => state.loading)
 	const [message, setMessage] = useState('')
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)
-	const [loading, setLoading] = useState(false)
+
+
 
 	const hdlChange = e => {
 		setMessage(e.target.value)
 	}
 	const hdlCreatePost = async e => {
 		try {
-			setLoading(true)
 			const body = new FormData()
 			body.append('message', message)
 			if(file) {
 				body.append('image', file)
 			}
 			const rs = await createPost(body, token, user)
+			console.log('createPost done in PostForm', rs)
 			closeMe()
 		}catch(err) {
 			const errMsg = err.response?.data?.error || err.message
 			console.log(errMsg)
 			toast.error(errMsg)		
 		}finally{
-			setLoading(false)
+			setMessage('')
 		}
 	}
 	return (

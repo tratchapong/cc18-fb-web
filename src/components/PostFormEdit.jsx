@@ -8,16 +8,15 @@ import AddPicture from './AddPicture'
 
 export default function PostFormEdit(props) {
 	const {closeMe} =props
-	console.log(scrollY)
 	const user = useUserStore(state => state.user)
 	const token = useUserStore(state => state.token)
 	const currentPost = usePostStore(state => state.currentPost)
 	const updatePost = usePostStore(state => state.updatePost)
-
+	const loading = usePostStore(state => state.loading)
 	const [message, setMessage] = useState(currentPost.message)
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)
-	const [loading, setLoading] = useState(false)
+	// const [loading, setLoading] = useState(false)
 	const [removePic, setRemovePic] = useState(false)
 
 	const hdlChange = e => {
@@ -25,7 +24,6 @@ export default function PostFormEdit(props) {
 	}
 	const hdlEditPost = async e => {
 		try {
-			setLoading(true)
 			const body = new FormData()
 			body.append('message', message)
 			if(file) {
@@ -41,7 +39,7 @@ export default function PostFormEdit(props) {
 			console.log(errMsg)
 			toast.error(errMsg)		
 		}finally{
-			setLoading(false)
+			
 		}
 	}
 	return (

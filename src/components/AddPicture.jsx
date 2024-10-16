@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { AddPictureIcon } from '../icons'
 
 export default function AddPicture(props) {
 	const {closeMe, file, setFile} = props
+	const inputRef = useRef(null)
+
 	const hdlClose = e => {
 		e.stopPropagation()
 		setFile(null)
@@ -15,10 +17,11 @@ export default function AddPicture(props) {
 	return (
 		<div className="flex flex-col p-2 border rounded-lg">
 			<div className="bg-slate-100 hover:bg-slate-200 min-h-40 rounded-lg relative cursor-pointer"
-				onClick={()=>document.getElementById('input-file').click()}
+				onClick={()=>inputRef.current.click()}
 			>
 				<input type="file" className='opacity-0' id='input-file'
 					onChange={hdlFileChange}
+					ref={inputRef}
 				/>
 				{ file && <img src={URL.createObjectURL(file)} className='h-100 block mx-auto' /> }
 				<button 

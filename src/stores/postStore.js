@@ -2,23 +2,27 @@ import axios from 'axios'
 import {create} from 'zustand'
 import {produce} from 'immer'
 import useUserStore from './userStore'
-import zukeeper from 'zukeeper'
+// import zukeeper from 'zukeeper'
 
-const usePostStore = create(zukeeper( (set, get) => ({
+const usePostStore = create( (set, get) => ({
 	posts : [],
 	totalRows : 0,
 	currentPost : null,
 	loading: false,
 	createPost : async (body, token, user) => {
+		set({loading: true})
 		const rs = await axios.post('http://localhost:8899/post', body , {
 			headers : { Authorization : `Bearer ${token}`}
 		})	
-
 		// set(state => ({
 		// 	posts : [ {...rs.data, user, likes: [], comments: []}, ...state.posts]
 		// }))
+		console.log('createPost done in postStore')
+		set( produce( state => {
+			state.posts.unshift( {...rs.data, user, likes:[], comments:[]}) 
+			state.loading = false
+		}) )
 
-		set( produce( state => {state.posts.unshift( {...rs.data, user, likes:[], comments:[]}) }) )
 	},
 	getAllPosts : async (token,skip=get().posts.length, perPage=3) => {
 		set(produce(state =>  {state.loading = true }))
@@ -26,7 +30,7 @@ const usePostStore = create(zukeeper( (set, get) => ({
 		const rs = await  axios.get(`http://localhost:8899/post?skip=${skip}&perPage=${perPage}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
-		console.log(rs.data.posts)
+		// console.log(rs.data.posts)
 		// set(state => ({posts: [...state.posts, ...rs.data.posts], loading: false, totalRows: rs.data.rows}))
 		set(produce(state => {
 			state.posts.push(...rs.data.posts)
@@ -52,6 +56,7 @@ const usePostStore = create(zukeeper( (set, get) => ({
 	},
 
 	updatePost : async (body, token, id) => {
+		set({loading: true})
 		const rs = await axios.put(`http://localhost:8899/post/${id}`, body, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})
@@ -61,6 +66,7 @@ const usePostStore = create(zukeeper( (set, get) => ({
 		set( produce( state => {
 			let idx = state.posts.findIndex(el=>el.id === id)
 			state.posts[idx] = { ...state.posts[idx], ...rs.data }
+			state.loading = false
 		} ))
 	},
 	createComment : async (body, token) => {
@@ -112,8 +118,7 @@ const usePostStore = create(zukeeper( (set, get) => ({
 	resetPosts : () => {
 		set(state => ({ posts : [], totalRows : 0, currentPost: null, loading: false}))
 	}
-})))
+}))
 
-window.store = usePostStore
 
 export default usePostStore
