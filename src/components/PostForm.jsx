@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Avatar from './Avatar'
-import useUserStore from '../stores/userStore'
 import { PhotoIcon } from '../icons'
 import { toast } from 'react-toastify'
-import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
+import { selectCreatePost, selectLoading, selectToken, selectUser } from '../stores/selector'
 
 export default function PostForm(props) {
-	const {closeMe, scrollY} = props
-	const user = useUserStore(state => state.user)
-	const token = useUserStore(state => state.token)
-	const createPost = usePostStore(state => state.createPost)
-	const getAllPosts = usePostStore(state => state.getAllPosts)
-	const loading = usePostStore(state => state.loading)
+	const {closeMe} = props
+	const user = selectUser()
+	const token = selectToken()
+	const createPost = selectCreatePost()
+	const loading = selectLoading()
+
 	const [message, setMessage] = useState('')
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)

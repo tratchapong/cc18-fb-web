@@ -1,6 +1,5 @@
 import Avatar from "./Avatar";
 import { PhotoIcon, SmileIcon, VideoIcon } from "../icons";
-import useUserStore from "../stores/userStore";
 import PostForm from "./PostForm";
 import { useState } from "react";
 import {
@@ -11,9 +10,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { selectUser } from "../stores/selector";
 
 export default function CreatePost() {
-  const user = useUserStore((state) => state.user);
+  const user = selectUser()
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>

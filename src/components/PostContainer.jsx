@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CreatePost from "./CreatePost";
 import PostItem from "./PostItem";
-import usePostStore from "../stores/postStore";
-import useUserStore from "../stores/userStore";
 import PostFormEdit from "./PostFormEdit";
 import {
   Dialog,
@@ -12,15 +10,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { selectCurrentPost, selectGetAllPosts, selectPosts, selectSetCurrentPost, selectToken, selectTotalRows } from "../stores/selector";
 
 export default function PostContainer() {
-	// console.log('PostContainer run...')
-  const posts = usePostStore((state) => state.posts);
-  const getAllPosts = usePostStore((state) => state.getAllPosts);
-  const totalRows = usePostStore((state) => state.totalRows);
-  const token = useUserStore((state) => state.token);
-  const currentPost = usePostStore((state) => state.currentPost);
-  const setCurrentPost = usePostStore((state) => state.setCurrentPost);
+
+  const posts = selectPosts()
+  const getAllPosts = selectGetAllPosts()
+  const totalRows = selectTotalRows()
+  const token = selectToken()
+
   const [skip, setSkip] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 

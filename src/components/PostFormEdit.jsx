@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
 import Avatar from './Avatar'
-import useUserStore from '../stores/userStore'
 import { PhotoIcon } from '../icons'
 import { toast } from 'react-toastify'
-import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
+import { selectCurrentPost, selectLoading, selectSetCurrentPost, selectToken, selectUpdatePost, selectUser } from '../stores/selector'
 
 export default function PostFormEdit(props) {
 	const {closeMe} =props
-	const user = useUserStore(state => state.user)
-	const token = useUserStore(state => state.token)
-	const currentPost = usePostStore(state => state.currentPost)
-	const updatePost = usePostStore(state => state.updatePost)
-	const loading = usePostStore(state => state.loading)
+	const user = selectUser()
+	const token = selectToken()
+	const currentPost = selectCurrentPost()
+	const setCurrentPost = selectSetCurrentPost()
+	const updatePost = selectUpdatePost()
+	const loading = selectLoading()
+
 	const [message, setMessage] = useState(currentPost.message)
 	const [addPic, setAddPic] = useState(false)
 	const [file, setFile] = useState(null)
-	// const [loading, setLoading] = useState(false)
 	const [removePic, setRemovePic] = useState(false)
 
 	const hdlChange = e => {

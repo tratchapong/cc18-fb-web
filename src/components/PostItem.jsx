@@ -10,22 +10,21 @@ import {
   ThreeDotIcon,
   VideoIcon,
 } from "../icons";
-import useUserStore from "../stores/userStore";
-import usePostStore from "../stores/postStore";
+
 import { toast } from "react-toastify";
 import TimeAgo from "react-timeago";
 import CommentContainer from "./CommentContainer";
+import { selectCreateLike, selectDeletePost, selectSetCurrentPost, selectToken, selectUnLike, selectUser } from "../stores/selector";
 
 export default function PostItem(props) {
   const { post, setIsOpen } = props;
-  // console.log(post.likes)
-  const user = useUserStore((state) => state.user);
-  const token = useUserStore((state) => state.token);
-  const deletePost = usePostStore((state) => state.deletePost);
-  const getAllPosts = usePostStore((state) => state.getAllPosts);
-  const setCurrentPost = usePostStore((state) => state.setCurrentPost);
-  const createLike = usePostStore((state) => state.createLike);
-  const unLike = usePostStore((state) => state.unLike);
+
+  const user = selectUser()
+  const token = selectToken()
+  const deletePost = selectDeletePost()
+  const setCurrentPost = selectSetCurrentPost()
+  const createLike = selectCreateLike()
+  const unLike = selectUnLike()
 
   const haveLike = () =>
     post.likes.findIndex((el) => el.userId === user.id) !== -1;
@@ -40,6 +39,7 @@ export default function PostItem(props) {
     }
     // getAllPosts(token)
   };
+
   const hdlDelete = async (e) => {
     try {
       if (!confirm("Delete this post?")) {

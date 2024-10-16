@@ -12,10 +12,7 @@ import {
 } from "../icons";
 import Avatar from "./Avatar";
 import { Link, useNavigate } from "react-router-dom";
-import useUserStore from "../stores/userStore";
-import { useShallow } from "zustand/shallow";
 import MenuItem from "./MenuItem";
-import usePostStore from "../stores/postStore";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,15 +21,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { selectLogout, selectResetPosts, selectUser } from "../stores/selector";
 
 export default function Header() {
-  // const logout = useUserStore(state => state.logout)
-  // const user = useUserStore(state => state.user)
+
   const navigate = useNavigate();
-  const { user, logout } = useUserStore(
-    useShallow((state) => ({ user: state.user, logout: state.logout }))
-  );
-  const resetPosts = usePostStore((state) => state.resetPosts);
+  const user = selectUser()
+  const logout = selectLogout()
+  const resetPosts = selectResetPosts()
 
   const hdlLogout = (e) => {
     resetPosts();

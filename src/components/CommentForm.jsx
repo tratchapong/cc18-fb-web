@@ -2,15 +2,14 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import { SendMessageIcon } from '../icons'
 import { toast } from 'react-toastify'
-import usePostStore from '../stores/postStore'
-import useUserStore from '../stores/userStore'
+import { selectCreateComment, selectToken, selectUser } from '../stores/selector'
 
 export default function CommentForm(props) {
 	const { postId } = props
-	const token = useUserStore(state => state.token)
-	const user = useUserStore(state => state.user)
-	const createComment = usePostStore(state => state.createComment)
-	const getAllPosts = usePostStore(state => state.getAllPosts)
+	const token = selectToken()
+	const user = selectUser()
+	const createComment = selectCreateComment()
+
 
 	const [message, setMessage] = useState('')
 

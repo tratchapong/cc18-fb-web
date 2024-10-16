@@ -4,10 +4,11 @@ import MenuItem from './MenuItem'
 import Avatar from './Avatar'
 import useUserStore from '../stores/userStore'
 import { useNavigate } from 'react-router-dom'
+import { selectUser } from '../stores/selector'
 
 
 export default function SidebarMenu() {
-	const user = useUserStore(state => state.user)
+	const user = selectUser()
 	const navigate = useNavigate()
 	return (
 		<div className="fixed top-14 h-full w-[350px] pt-2
