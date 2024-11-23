@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { selectCurrentPost, selectGetAllPosts, selectPosts, selectSetCurrentPost, selectToken, selectTotalRows } from "../stores/selector";
+import { selectCurrentPost, selectGetAllPosts, selectPosts, selectToken, selectTotalRows } from "../stores/selector";
 
 export default function PostContainer() {
 
@@ -21,7 +21,6 @@ export default function PostContainer() {
 
   const [skip, setSkip] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-
 
   const handleOnScroll = () => {
     if (

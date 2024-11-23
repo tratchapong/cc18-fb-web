@@ -1,12 +1,13 @@
 import axios from 'axios'
 import {create} from 'zustand'
 import {createJSONStorage, persist} from 'zustand/middleware'
+import { MAIN_API } from '../api/main-api'
 
 const useUserStore = create( persist((set, get)=> ({
 	user: null,
 	token : '',
 	login : async (input)=>{
-		const rs = await axios.post('http://localhost:8899/auth/login', input)
+		const rs = await axios.post(`${MAIN_API}/auth/login`, input)
 		set({token : rs.data.token , user: rs.data.user})
 		return rs.data
 	},

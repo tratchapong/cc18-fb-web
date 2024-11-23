@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { MAIN_API } from "../api/main-api"
 
 export default function Register() {
 
@@ -20,7 +21,7 @@ export default function Register() {
 		try{
 			e.preventDefault()
 			//validation
-			const rs = axios.post('http://localhost:8899/auth/register', input)
+			const rs = axios.post(`${MAIN_API}/auth/register`, input)
 			console.log(rs.data)
 			setInput({
 				firstName: '',

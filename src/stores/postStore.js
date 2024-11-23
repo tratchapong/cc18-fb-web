@@ -2,6 +2,7 @@ import axios from 'axios'
 import {create} from 'zustand'
 import {produce} from 'immer'
 import useUserStore from './userStore'
+import { MAIN_API } from '../api/main-api'
 // import zukeeper from 'zukeeper'
 
 const usePostStore = create( (set, get) => ({
@@ -11,7 +12,7 @@ const usePostStore = create( (set, get) => ({
 	loading: false,
 	createPost : async (body, token, user) => {
 		set({loading: true})
-		const rs = await axios.post('http://localhost:8899/post', body , {
+		const rs = await axios.post(`${MAIN_API}/post`, body , {
 			headers : { Authorization : `Bearer ${token}`}
 		})	
 		// set(state => ({
@@ -27,7 +28,7 @@ const usePostStore = create( (set, get) => ({
 	getAllPosts : async (token,skip=get().posts.length, perPage=3) => {
 		set(produce(state =>  {state.loading = true }))
 		// set({loading: true})
-		const rs = await  axios.get(`http://localhost:8899/post?skip=${skip}&perPage=${perPage}`, {
+		const rs = await  axios.get(`${MAIN_API}/post?skip=${skip}&perPage=${perPage}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
 		// console.log(rs.data.posts)
@@ -40,7 +41,7 @@ const usePostStore = create( (set, get) => ({
 		set({loading: false})
 	},
 	deletePost : async ( token, id) => {
-		const rs = await axios.delete(`http://localhost:8899/post/${id}`, {
+		const rs = await axios.delete(`${MAIN_API}/post/${id}`, {
 			headers : { Authorization : `Bearer ${token}`}
 		})
 		// set(state => ({
@@ -57,7 +58,7 @@ const usePostStore = create( (set, get) => ({
 
 	updatePost : async (body, token, id) => {
 		set({loading: true})
-		const rs = await axios.put(`http://localhost:8899/post/${id}`, body, {
+		const rs = await axios.put(`${MAIN_API}/post/${id}`, body, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})
 		// set(state => ({
@@ -70,7 +71,7 @@ const usePostStore = create( (set, get) => ({
 		} ))
 	},
 	createComment : async (body, token) => {
-		const rs = await axios.post('http://localhost:8899/comment' ,body, {
+		const rs = await axios.post(`${MAIN_API}/comment` ,body, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})	
 		// set(state => ({
@@ -85,7 +86,7 @@ const usePostStore = create( (set, get) => ({
 		}))
 	},
 	createLike : async (token, body) => {
-		const rs = await axios.post('http://localhost:8899/like', body, {
+		const rs = await axios.post(`${MAIN_API}/like`, body, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})
 		// set(state => ({
@@ -100,7 +101,7 @@ const usePostStore = create( (set, get) => ({
 		}))
 	},
 	unLike : async  (token, id) => {
-		const rs = await axios.delete(`http://localhost:8899/like/${id}`, {
+		const rs = await axios.delete(`${MAIN_API}/like/${id}`, {
 			headers : { Authorization : `Bearer ${token}`}	
 		})
 		// set(state => ({
